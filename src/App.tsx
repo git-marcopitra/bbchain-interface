@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC, useCallback } from 'react';
+import Particles from 'react-particles';
+import { loadFull } from 'tsparticles';
+import { Container, Engine } from 'tsparticles-engine';
 
-function App() {
+import ConnectWallet from './components/connect-wallet';
+import { particles } from './constants';
+import Box from './elements/box';
+
+const App: FC = () => {
+  const particlesInit = useCallback(async (engine: Engine) => {
+    console.log(engine);
+    await loadFull(engine);
+  }, []);
+
+  const particlesLoaded = useCallback(async (container?: Container) => {
+    await console.log(container);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box
+      width="100vw"
+      height="100vh"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Box width="100vw" height="100vh" position="absolute">
+        <Particles
+          id="tsparticles"
+          options={particles}
+          init={particlesInit}
+          loaded={particlesLoaded}
+        />
+      </Box>
+      <Box position="relative">
+        <ConnectWallet />
+      </Box>
+    </Box>
   );
-}
+};
 
 export default App;

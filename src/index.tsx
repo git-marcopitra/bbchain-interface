@@ -1,6 +1,7 @@
+import { css, Global } from '@emotion/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -9,6 +10,21 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+    <Global
+      styles={css`
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+            Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        html,
+        body {
+          overflow-x: hidden;
+        }
+      `}
+    />
     <App />
   </React.StrictMode>
 );
